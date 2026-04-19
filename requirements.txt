@@ -1,0 +1,8 @@
+# Runtime
+openai>=1.40,<2
+certifi>=2024.2.2
+keyring>=25
+pydantic>=2,<3
+
+# Dev / asset build
+# pip install -r requirements.txt -r requirements-dev.txt

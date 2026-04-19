@@ -1,0 +1,33 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+*.spec.bak
+Autoreview.spec
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated review report (optional)
+VENICE_CODE_REVIEW.md
+
+# Secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Local review state inside a target repo (document for users)
+.venice_review/

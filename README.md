@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/app_icon_256.png" alt="Autoreview" width="128" height="128">
+  <img src="assets/app_icon_256.png?v=lens-center" alt="Autoreview" width="128" height="128">
 </p>
 
 # Autoreview

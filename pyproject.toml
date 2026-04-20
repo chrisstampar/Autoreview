@@ -33,7 +33,9 @@ dependencies = [
 
 [project.urls]
 Documentation = "https://docs.venice.ai"
+Homepage = "https://github.com/chrisstampar/Autoreview"
 Repository = "https://github.com/chrisstampar/Autoreview"
+Issues = "https://github.com/chrisstampar/Autoreview/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7,<9", "pytest-cov>=4", "ruff>=0.8", "pyinstaller>=6"]

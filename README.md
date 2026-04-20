@@ -2,6 +2,8 @@
 
 Batch [Venice AI](https://venice.ai) code review for a whole project: each run processes up to **N** files, saves progress under `<project>/.venice_review/`, and appends to **`VENICE_CODE_REVIEW.md`** until every file is done. Use the **CLI** or a **dark-themed Tk GUI**. Optional **macOS `.app`** build via `./build_app.sh`.
 
+Source: [github.com/chrisstampar/Autoreview](https://github.com/chrisstampar/Autoreview)
+
 ## Setup
 
 Requires **Python 3.10+** (see `pyproject.toml`).
@@ -89,6 +91,11 @@ Add:
 
 Optionally ignore `VENICE_CODE_REVIEW.md` if it contains sensitive snippets. **`.env`** (basename) is never sent to Venice during discovery.
 
+## Security
+
+- **Never commit** Venice API keys, `.env` files, or review reports that contain secrets. This repository’s `.gitignore` excludes common cases (e.g. `.env`, `VENICE_CODE_REVIEW.md`); keep using env vars or your OS keychain for keys.
+- **Code you review** is sent to Venice’s API under your account; scope and network policies are your responsibility.
+
 ## Trust boundary
 
 Sending source files to Venice is your decision; treat it like pasting code into any cloud API.
@@ -110,6 +117,10 @@ pytest -q --cov=autoreview --cov-report=term-missing
 ```
 
 Lint (optional): `ruff check autoreview tests`
+
+## License
+
+MIT — see [`LICENSE`](LICENSE).
 
 ## Troubleshooting
 

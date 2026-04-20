@@ -78,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
     key = get_api_key(root)
     if not key and not args.dry_run:
         try:
-            print("No VENICE_API_KEY in environment; enter key to store in keychain for this project.")
+            print("No VENICE_API_KEY in environment; enter key to store in the system keychain (reused for all projects).")
             key = prompt_and_store_key(root)
         except (EOFError, KeyboardInterrupt):
             print("Aborted.", file=sys.stderr)

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/app_icon_256.png?v=fit-lens" alt="Autoreview" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/chrisstampar/Autoreview/81e68f4e38f7aad4999c00a72323fc0a89f8eaa2/assets/app_icon_256.png" alt="Autoreview" width="128" height="128">
 </p>
 
 # Autoreview

@@ -118,6 +118,19 @@ pytest -q --cov=autoreview --cov-report=term-missing
 
 Lint (optional): `ruff check autoreview tests`
 
+## Maintainer setup (GitHub)
+
+After merging this repo, configure the remote (requires [GitHub CLI](https://cli.github.com/) `gh auth login` once, or use the web UI).
+
+| Goal | What to do |
+|------|------------|
+| **Repository description** | Repo → **⚙ Settings** (or **About** → ✎). Paste a short description (≤350 chars), e.g.: *Batch Venice AI code review — resumable batches, one markdown report, CLI + dark GUI, optional macOS app. Skips caches and env files by default. MIT.* |
+| **Topics** | On the repo main page: **About** → ⚙ → add topics such as `venice-ai`, `code-review`, `python`, `tkinter`, `cli`, `pyinstaller`, `developer-tools`. |
+| **Dependabot** | [`.github/dependabot.yml`](.github/dependabot.yml) enables weekly PRs for **pip** and **GitHub Actions**. Merge it, then watch the **Pull requests** tab. |
+| **Release** | Tag **`v0.1.0`** is published on `main`. In **Releases** → **Draft a new release**, choose tag `v0.1.0`, title `Autoreview 0.1.0`, add notes, publish. Or: `gh release create v0.1.0 --verify-tag --generate-notes` |
+| **`gh` one-liners** | `gh repo edit chrisstampar/Autoreview --description "Batch Venice AI code review — resumable batches, markdown report, CLI + GUI, optional macOS app. MIT."` and `gh repo edit chrisstampar/Autoreview --add-topic venice-ai --add-topic code-review --add-topic python --add-topic tkinter` |
+| **Branch protection** | **Settings** → **Rules** → **Rulesets** (or **Branches** → **Branch protection**): protect **`main`**, enable **Require status checks to pass**, and select the **CI** workflow jobs (e.g. `test` on Python 3.10 and 3.12) after at least one successful run. Skip “required reviewers” if you’re the only committer. |
+
 ## License
 
 MIT — see [`LICENSE`](LICENSE).

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/app_icon_256.png" alt="Autoreview" width="128" height="128">
+</p>
+
 # Autoreview
 
 Batch [Venice AI](https://venice.ai) code review for a whole project: each run processes up to **N** files, saves progress under `<project>/.venice_review/`, and appends to **`VENICE_CODE_REVIEW.md`** until every file is done. Use the **CLI** or a **dark-themed Tk GUI**. Optional **macOS `.app`** build via `./build_app.sh`.

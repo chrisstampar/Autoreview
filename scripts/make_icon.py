@@ -41,20 +41,51 @@ _cached_base: Image.Image | None = None
 _font_cache: dict[int, ImageFont.ImageFont | ImageFont.FreeTypeFont] = {}
 
 
-def _mono_font(size: int) -> ImageFont.ImageFont | ImageFont.FreeTypeFont:
-    if size not in _font_cache:
+def _mono_font_at(font_px: int) -> ImageFont.ImageFont | ImageFont.FreeTypeFont:
+    """Monospace font at ``font_px`` pt; cached by pixel size."""
+    font_px = max(6, int(font_px))
+    if font_px not in _font_cache:
         for path in (
             "/System/Library/Fonts/SFNSMono.ttf",
             "/Library/Fonts/Courier New.ttf",
         ):
             try:
-                _font_cache[size] = ImageFont.truetype(path, max(9, size // 6))
+                _font_cache[font_px] = ImageFont.truetype(path, font_px)
                 break
             except OSError:
                 continue
         else:
-            _font_cache[size] = ImageFont.load_default()
-    return _font_cache[size]
+            _font_cache[font_px] = ImageFont.load_default()
+    return _font_cache[font_px]
+
+
+def _font_for_text_in_circle(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    mr: int,
+) -> ImageFont.ImageFont | ImageFont.FreeTypeFont:
+    """Largest monospace size so ``text`` fits comfortably inside a circle of radius ``mr``."""
+    # Inscribed box inside the lens; stay inward from the rim (pad + small inner margin).
+    pad = max(3, int(mr * 0.08))
+    inner = max(4, int(mr * 0.035))
+    max_w = max(8, int(2 * mr * 0.42) - pad - inner)
+    max_h = max(8, int(2 * mr * 0.38) - pad - inner)
+    # Slightly undershoot limits so glyphs are not mathematically flush to the box edge.
+    lim_slack = max(2, int(mr * 0.03))
+    lim_w, lim_h = max_w - lim_slack, max_h - lim_slack
+    lo, hi = 6, max(14, mr * 3)
+    best: ImageFont.ImageFont | ImageFont.FreeTypeFont = _mono_font_at(6)
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        font = _mono_font_at(mid)
+        bbox = draw.textbbox((0, 0), text, font=font)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        if tw <= lim_w and th <= lim_h:
+            best = font
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return best
 
 
 def _draw_at(size: int) -> Image.Image:
@@ -81,8 +112,8 @@ def _draw_at(size: int) -> Image.Image:
     hx1 = hx0 + int(mr * 0.9)
     hy1 = hy0 + int(mr * 0.9)
     draw.line([(hx0, hy0), (hx1, hy1)], fill=COLOR_TILE_OUTLINE, width=max(2, size // 28))
-    font = _mono_font(size)
     t = "</>"
+    font = _font_for_text_in_circle(draw, t, mr)
     # Align with lens center (cx, cy), not tile center — matches magnifier geometry.
     oy = max(1, size // 128)  # slight downward nudge: monospace often looks optically high
     draw.text((cx, cy + oy), t, fill=COLOR_TEXT, font=font, anchor="mm")

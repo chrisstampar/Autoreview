@@ -26,7 +26,7 @@ classifiers = [
 ]
 dependencies = [
   "openai>=1.40,<2",
-  "certifi>=2024.2.2",
+  "certifi>=2026.2.25",
   "keyring>=25",
   "pydantic>=2,<3",
 ]

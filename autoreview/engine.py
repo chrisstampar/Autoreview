@@ -338,11 +338,10 @@ def filter_paths(
     return sorted(result)
 
 
-# Basenames to skip in every review (handoff/meta; secrets; not app source).
+# Basenames to skip in every review (meta; secrets; not app source).
 _SKIP_REVIEW_BASENAMES = frozenset(
     {
         ".env",
-        "AGENT_SESSION_CONTEXT.md",
         DEFAULT_OUTPUT_NAME,  # do not send the generated report back through the API
     }
 )

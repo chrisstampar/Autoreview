@@ -93,12 +93,10 @@ def test_compute_fingerprint_stable() -> None:
 def test_discover_skips_meta_files(tmp_path: Path) -> None:
     (tmp_path / "real.py").write_text("x = 1\n")
     (tmp_path / ".env").write_text("SECRET=x\n")
-    (tmp_path / "AGENT_SESSION_CONTEXT.md").write_text("# handoff\n")
     (tmp_path / "VENICE_CODE_REVIEW.md").write_text("# report\n")
     found = discover_files(tmp_path)
     assert "real.py" in found
     assert ".env" not in found
-    assert "AGENT_SESSION_CONTEXT.md" not in found
     assert "VENICE_CODE_REVIEW.md" not in found
 
 

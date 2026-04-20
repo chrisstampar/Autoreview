@@ -87,7 +87,7 @@ Add:
 .venice_review/
 ```
 
-Optionally ignore `VENICE_CODE_REVIEW.md` if it contains sensitive snippets. **Autoreview always skips `AGENT_SESSION_CONTEXT.md`** and **`.env`** during file discovery (never sent to Venice), so you can keep handoff notes and local secrets out of the model context.
+Optionally ignore `VENICE_CODE_REVIEW.md` if it contains sensitive snippets. **`.env`** (basename) is never sent to Venice during discovery.
 
 ## Trust boundary
 

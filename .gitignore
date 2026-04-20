@@ -24,9 +24,6 @@ Autoreview.spec
 # Generated review report (optional)
 VENICE_CODE_REVIEW.md
 
-# Optional local agent / session handoff (not published)
-AGENT_SESSION_CONTEXT.md
-
 # Secrets (never commit)
 .env
 .env.*

@@ -48,9 +48,9 @@ Not SQLite — plain JSON. Safe to delete the whole folder to reset progress (or
 - **`_TOOL_AND_CACHE_DIR_NAMES`** + **`_should_skip_noise_path`**: after git/walk + filters, drop any path under those dirs (e.g. `.ruff_cache`, caches, `node_modules`, `target`, …) and **`CACHEDIR.TAG`**. Saves tokens vs reviewing cache metadata.
 - **Default doc filter** (`apply_default_doc_excludes`, on unless `review_markdown` / `--review-markdown` / `AUTOREVIEW_REVIEW_MARKDOWN`): skip `.md`/`.mdx`/`.rst`-style names and paths with segment `doc`, `docs`, or `documentation`.
 
-## GitHub / release prep
+## Repository
 
-- Root **`LICENSE`** (MIT), **`.gitattributes`**, **`.github/workflows/ci.yml`**, expanded **`.gitignore`**. README section **Pushing to GitHub** has init/push steps. **`Repository`** in `pyproject.toml`: https://github.com/chrisstampar/Autoreview
+- Upstream: https://github.com/chrisstampar/Autoreview — **`Repository`** is set in `pyproject.toml` `[project.urls]`.
 
 ## Recent work
 
@@ -63,7 +63,8 @@ Not SQLite — plain JSON. Safe to delete the whole folder to reset progress (or
 - **2026-04-19**: Report path resolution: `_resolve_report_path` uses `state.output_name` when `--output` omitted (fixes appending to wrong file after `CLI --output`). Clearer logs when no pending work or all skips; README troubleshooting row.
 - **2026-04-19**: Default discovery excludes markdown/rst and `doc`/`docs`/`documentation` trees; opt-in via `--review-markdown`, `AUTOREVIEW_REVIEW_MARKDOWN`, GUI checkbox. `_matches_default_doc_exclude` in `engine.py`.
 - **2026-04-19**: Review prompt asks for **empty dimensions** instead of filler; **`_review_context_hint`** by path (workflows, Docker, Makefile, config extensions, SQL, tests); **`_scrub_review_dict`** / **`_is_substantive_review_text`** strip generic one-liners; **`json_to_markdown`** omits empty sections and shows a placeholder when nothing substantive remains.
-- **2026-04-19**: GitHub prep: **`LICENSE`**, **`.gitattributes`**, **`.github/workflows/ci.yml`**, `.gitignore` tweaks (`.ruff_cache/`, IDE swap), README **Pushing to GitHub**, optional **`Repository`** comment in `pyproject.toml`.
+- **2026-04-19**: Repo prep: **`LICENSE`**, **`.gitattributes`**, **`.github/workflows/ci.yml`**, `.gitignore` tweaks (`.ruff_cache/`, IDE swap), **`Repository`** in `pyproject.toml`.
 - **2026-04-19**: `SYSTEM_PROMPT` extended with **product judgment**: skip low-ROI churn on cold paths; avoid pedantic test/style nits vs real issues; crypto/security subtlety → verify/document, not assert defects without reasoning.
 - **2026-04-19**: Suggestions: prompt **cap 5** + **anchor to symbol/line behavior**; **`MAX_SUGGESTIONS_PER_FILE`** + **`_cap_suggestions_by_severity`** in `engine.py` enforce cap (high → medium → low).
 - **2026-04-20**: Report: **`_format_run_banner`** prepends once per batch (`## Autoreview run` + ISO timestamp + model + batch + file list). Prompt: check **sync vs async** before race/await findings; **high vs medium** for defense-in-depth vs reachable exploitation.
+- **2026-04-21**: Removed README **Pushing to GitHub** section; **AGENT_SESSION_CONTEXT** has short **Repository** pointer instead.

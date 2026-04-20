@@ -111,22 +111,6 @@ pytest -q --cov=autoreview --cov-report=term-missing
 
 Lint (optional): `ruff check autoreview tests`
 
-## Pushing to GitHub
-
-The tree includes a root **`LICENSE`** (MIT, matching `pyproject.toml`), **`.gitattributes`**, **`.github/workflows/ci.yml`** (Ruff + pytest on Python 3.10 and 3.12), and a **`.gitignore`** that excludes virtualenvs, `dist/` / PyInstaller output, caches, secrets (`.env`), and optional local review artifacts (`VENICE_CODE_REVIEW.md`, `.venice_review/`).
-
-```bash
-git init
-git add .
-git status   # confirm no secrets or .venv/
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/chrisstampar/Autoreview.git
-git push -u origin main
-```
-
-After the repo exists, you can add a **`Repository`** line under `[project.urls]` in `pyproject.toml`. If you want this project’s own `VENICE_CODE_REVIEW.md` in git, remove that line from `.gitignore`.
-
 ## Troubleshooting
 
 | Issue | What to try |

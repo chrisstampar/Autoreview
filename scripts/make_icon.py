@@ -83,11 +83,9 @@ def _draw_at(size: int) -> Image.Image:
     draw.line([(hx0, hy0), (hx1, hy1)], fill=COLOR_TILE_OUTLINE, width=max(2, size // 28))
     font = _mono_font(size)
     t = "</>"
-    bbox = draw.textbbox((0, 0), t, font=font)
-    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    tx = size // 2 - tw // 2
-    ty = size // 2 - th // 2 - max(1, size // 40)
-    draw.text((tx, ty), t, fill=COLOR_TEXT, font=font)
+    # Align with lens center (cx, cy), not tile center — matches magnifier geometry.
+    oy = max(1, size // 128)  # slight downward nudge: monospace often looks optically high
+    draw.text((cx, cy + oy), t, fill=COLOR_TEXT, font=font, anchor="mm")
     return img
 
 

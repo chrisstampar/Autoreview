@@ -28,7 +28,7 @@ dependencies = [
   "openai>=1.40,<2",
   "certifi>=2024.2.2",
   "keyring>=25",
-  "pydantic>=2,<3",
+  "pydantic>=2.13.2,<3",
 ]
 
 [project.urls]
